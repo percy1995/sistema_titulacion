@@ -75,9 +75,7 @@ class AlumnoController extends Controller
     {
         abort_if(Gate::denies('alumno_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $traplipros = Traplipro::pluck('titulo', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        return view('admin.alumnos.create', compact('traplipros'));
+        return view('admin.alumnos.create');
     }
 
     public function store(StoreAlumnoRequest $request)
@@ -99,11 +97,9 @@ class AlumnoController extends Controller
     {
         abort_if(Gate::denies('alumno_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $traplipros = Traplipro::pluck('titulo', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $alumno->load('traplipro');
 
-        return view('admin.alumnos.edit', compact('alumno', 'traplipros'));
+        return view('admin.alumnos.edit', compact('alumno'));
     }
 
     public function update(UpdateAlumnoRequest $request, Alumno $alumno)

@@ -21,20 +21,15 @@ class UpdateGrupoRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'dia' => [
-                'string',
-                'required',
-            ],
             'horainicio' => [
-                'required',
                 'date_format:' . config('panel.time_format'),
+                'nullable',
             ],
             'horafin' => [
-                'required',
-                'date_format:' . config('panel.date_format'),
+                'date_format:' . config('panel.time_format'),
+                'nullable',
             ],
             'tipo' => [
-                'string',
                 'required',
             ],
             'aula' => [

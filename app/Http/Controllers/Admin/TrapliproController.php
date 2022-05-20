@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyTrapliproRequest;
 use App\Http\Requests\StoreTrapliproRequest;
 use App\Http\Requests\UpdateTrapliproRequest;
@@ -17,12 +18,14 @@ use Yajra\DataTables\Facades\DataTables;
 
 class TrapliproController extends Controller
 {
+    use CsvImportTrait;
+
     public function index(Request $request)
     {
         abort_if(Gate::denies('traplipro_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = Traplipro::with(['programaacademico', 'programamodular', 'grupo', 'docente'])->select(sprintf('%s.*', (new Traplipro())->table));
+            $query = Traplipro::with(['programaacademico', 'programamodular', 'docente', 'grupo'])->select(sprintf('%s.*', (new Traplipro())->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -46,12 +49,6 @@ class TrapliproController extends Controller
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : '';
             });
-            $table->editColumn('titulo', function ($row) {
-                return $row->titulo ? $row->titulo : '';
-            });
-            $table->editColumn('nota', function ($row) {
-                return $row->nota ? $row->nota : '';
-            });
             $table->addColumn('programaacademico_nombreprograma', function ($row) {
                 return $row->programaacademico ? $row->programaacademico->nombreprograma : '';
             });
@@ -60,10 +57,12 @@ class TrapliproController extends Controller
                 return $row->programamodular ? $row->programamodular->nombreprograma : '';
             });
 
-            $table->addColumn('grupo_nombre', function ($row) {
-                return $row->grupo ? $row->grupo->nombre : '';
+            $table->editColumn('titulo', function ($row) {
+                return $row->titulo ? $row->titulo : '';
             });
-
+            $table->editColumn('nota', function ($row) {
+                return $row->nota ? $row->nota : '';
+            });
             $table->addColumn('docente_dni', function ($row) {
                 return $row->docente ? $row->docente->dni : '';
             });
@@ -72,16 +71,16 @@ class TrapliproController extends Controller
                 return $row->docente ? (is_string($row->docente) ? $row->docente : $row->docente->direccion) : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'programaacademico', 'programamodular', 'grupo', 'docente']);
+            $table->rawColumns(['actions', 'placeholder', 'programaacademico', 'programamodular', 'docente']);
 
             return $table->make(true);
         }
 
         $programa_modulars = ProgramaModular::get();
-        $grupos            = Grupo::get();
         $docentes          = Docente::get();
+        $grupos            = Grupo::get();
 
-        return view('admin.traplipros.index', compact('programa_modulars', 'grupos', 'docentes'));
+        return view('admin.traplipros.index', compact('programa_modulars', 'docentes', 'grupos'));
     }
 
     public function create()
@@ -92,11 +91,9 @@ class TrapliproController extends Controller
 
         $programamodulars = ProgramaModular::pluck('nombreprograma', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $grupos = Grupo::pluck('nombre', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $docentes = Docente::pluck('dni', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.traplipros.create', compact('docentes', 'grupos', 'programaacademicos', 'programamodulars'));
+        return view('admin.traplipros.create', compact('docentes', 'programaacademicos', 'programamodulars'));
     }
 
     public function store(StoreTrapliproRequest $request)
@@ -114,13 +111,11 @@ class TrapliproController extends Controller
 
         $programamodulars = ProgramaModular::pluck('nombreprograma', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $grupos = Grupo::pluck('nombre', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $docentes = Docente::pluck('dni', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $traplipro->load('programaacademico', 'programamodular', 'grupo', 'docente');
+        $traplipro->load('programaacademico', 'programamodular', 'docente', 'grupo');
 
-        return view('admin.traplipros.edit', compact('docentes', 'grupos', 'programaacademicos', 'programamodulars', 'traplipro'));
+        return view('admin.traplipros.edit', compact('docentes', 'programaacademicos', 'programamodulars', 'traplipro'));
     }
 
     public function update(UpdateTrapliproRequest $request, Traplipro $traplipro)
@@ -134,7 +129,7 @@ class TrapliproController extends Controller
     {
         abort_if(Gate::denies('traplipro_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $traplipro->load('programaacademico', 'programamodular', 'grupo', 'docente');
+        $traplipro->load('programaacademico', 'programamodular', 'docente', 'grupo');
 
         return view('admin.traplipros.show', compact('traplipro'));
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyDocenteRequest;
 use App\Http\Requests\StoreDocenteRequest;
@@ -19,6 +20,7 @@ use Yajra\DataTables\Facades\DataTables;
 class DocenteController extends Controller
 {
     use MediaUploadingTrait;
+    use CsvImportTrait;
 
     public function index(Request $request)
     {
@@ -65,7 +67,7 @@ class DocenteController extends Controller
                 return $row->celular ? $row->celular : '';
             });
             $table->editColumn('tipo', function ($row) {
-                return $row->tipo ? $row->tipo : '';
+                return $row->tipo ? Docente::TIPO_SELECT[$row->tipo] : '';
             });
             $table->editColumn('firma', function ($row) {
                 if ($photo = $row->firma) {
@@ -94,11 +96,7 @@ class DocenteController extends Controller
     {
         abort_if(Gate::denies('docente_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $personas = Persona::pluck('nombres', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $programas = Programa::pluck('nombre', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        return view('admin.docentes.create', compact('personas', 'programas'));
+        return view('admin.docentes.create');
     }
 
     public function store(StoreDocenteRequest $request)
@@ -120,13 +118,9 @@ class DocenteController extends Controller
     {
         abort_if(Gate::denies('docente_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $personas = Persona::pluck('nombres', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        $programas = Programa::pluck('nombre', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $docente->load('persona', 'programa');
 
-        return view('admin.docentes.edit', compact('docente', 'personas', 'programas'));
+        return view('admin.docentes.edit', compact('docente'));
     }
 
     public function update(UpdateDocenteRequest $request, Docente $docente)

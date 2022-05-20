@@ -6,6 +6,10 @@
             <a class="btn btn-success" href="{{ route('admin.programas.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.programa.title_singular') }}
             </a>
+            <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
+                {{ trans('global.app_csvImport') }}
+            </button>
+            @include('csvImport.modal', ['model' => 'Programa', 'route' => 'admin.programas.parseCsvImport'])
         </div>
     </div>
 @endcan
@@ -100,7 +104,7 @@
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,
-    order: [[ 1, 'desc' ]],
+    order: [[ 1, 'asc' ]],
     pageLength: 25,
   };
   let table = $('.datatable-Programa').DataTable(dtOverrideGlobals);

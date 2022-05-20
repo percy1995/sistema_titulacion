@@ -14,7 +14,9 @@
                 <label class="required" for="name">{{ trans('cruds.task.fields.name') }}</label>
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', $task->name) }}" required>
                 @if($errors->has('name'))
-                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('name') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.task.fields.name_helper') }}</span>
             </div>
@@ -22,7 +24,9 @@
                 <label for="description">{{ trans('cruds.task.fields.description') }}</label>
                 <textarea class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description">{{ old('description', $task->description) }}</textarea>
                 @if($errors->has('description'))
-                    <span class="text-danger">{{ $errors->first('description') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('description') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.task.fields.description_helper') }}</span>
             </div>
@@ -34,7 +38,9 @@
                     @endforeach
                 </select>
                 @if($errors->has('status'))
-                    <span class="text-danger">{{ $errors->first('status') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('status') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.task.fields.status_helper') }}</span>
             </div>
@@ -50,7 +56,9 @@
                     @endforeach
                 </select>
                 @if($errors->has('tags'))
-                    <span class="text-danger">{{ $errors->first('tags') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('tags') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.task.fields.tag_helper') }}</span>
             </div>
@@ -59,7 +67,9 @@
                 <div class="needsclick dropzone {{ $errors->has('attachment') ? 'is-invalid' : '' }}" id="attachment-dropzone">
                 </div>
                 @if($errors->has('attachment'))
-                    <span class="text-danger">{{ $errors->first('attachment') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('attachment') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.task.fields.attachment_helper') }}</span>
             </div>
@@ -67,7 +77,9 @@
                 <label for="due_date">{{ trans('cruds.task.fields.due_date') }}</label>
                 <input class="form-control date {{ $errors->has('due_date') ? 'is-invalid' : '' }}" type="text" name="due_date" id="due_date" value="{{ old('due_date', $task->due_date) }}">
                 @if($errors->has('due_date'))
-                    <span class="text-danger">{{ $errors->first('due_date') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('due_date') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.task.fields.due_date_helper') }}</span>
             </div>
@@ -79,7 +91,9 @@
                     @endforeach
                 </select>
                 @if($errors->has('assigned_to'))
-                    <span class="text-danger">{{ $errors->first('assigned_to') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('assigned_to') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.task.fields.assigned_to_helper') }}</span>
             </div>

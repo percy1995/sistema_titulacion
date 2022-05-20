@@ -13,7 +13,9 @@
                 <label class="required" for="name">{{ trans('cruds.user.fields.name') }}</label>
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
                 @if($errors->has('name'))
-                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('name') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.name_helper') }}</span>
             </div>
@@ -21,7 +23,9 @@
                 <label class="required" for="email">{{ trans('cruds.user.fields.email') }}</label>
                 <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="email" name="email" id="email" value="{{ old('email') }}" required>
                 @if($errors->has('email'))
-                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('email') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.email_helper') }}</span>
             </div>
@@ -29,9 +33,24 @@
                 <label class="required" for="password">{{ trans('cruds.user.fields.password') }}</label>
                 <input class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" type="password" name="password" id="password" required>
                 @if($errors->has('password'))
-                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('password') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.password_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <div class="form-check {{ $errors->has('approved') ? 'is-invalid' : '' }}">
+                    <input type="hidden" name="approved" value="0">
+                    <input class="form-check-input" type="checkbox" name="approved" id="approved" value="1" {{ old('approved', 0) == 1 ? 'checked' : '' }}>
+                    <label class="form-check-label" for="approved">{{ trans('cruds.user.fields.approved') }}</label>
+                </div>
+                @if($errors->has('approved'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('approved') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.approved_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="roles">{{ trans('cruds.user.fields.roles') }}</label>
@@ -45,7 +64,9 @@
                     @endforeach
                 </select>
                 @if($errors->has('roles'))
-                    <span class="text-danger">{{ $errors->first('roles') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('roles') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.roles_helper') }}</span>
             </div>
@@ -57,7 +78,9 @@
                     @endforeach
                 </select>
                 @if($errors->has('persona'))
-                    <span class="text-danger">{{ $errors->first('persona') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('persona') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.persona_helper') }}</span>
             </div>

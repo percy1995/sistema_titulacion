@@ -6,6 +6,10 @@
             <a class="btn btn-success" href="{{ route('admin.traplipros.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.traplipro.title_singular') }}
             </a>
+            <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
+                {{ trans('global.app_csvImport') }}
+            </button>
+            @include('csvImport.modal', ['model' => 'Traplipro', 'route' => 'admin.traplipros.parseCsvImport'])
         </div>
     </div>
 @endcan
@@ -25,19 +29,16 @@
                         {{ trans('cruds.traplipro.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.traplipro.fields.titulo') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.traplipro.fields.nota') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.traplipro.fields.programaacademico') }}
                     </th>
                     <th>
                         {{ trans('cruds.traplipro.fields.programamodular') }}
                     </th>
                     <th>
-                        {{ trans('cruds.traplipro.fields.grupo') }}
+                        {{ trans('cruds.traplipro.fields.titulo') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.traplipro.fields.nota') }}
                     </th>
                     <th>
                         {{ trans('cruds.traplipro.fields.docente') }}
@@ -56,12 +57,6 @@
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
                         <select class="search">
                             <option value>{{ trans('global.all') }}</option>
                             @foreach($programa_modulars as $key => $item)
@@ -78,12 +73,10 @@
                         </select>
                     </td>
                     <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($grupos as $key => $item)
-                                <option value="{{ $item->nombre }}">{{ $item->nombre }}</option>
-                            @endforeach
-                        </select>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                         <select class="search">
@@ -151,11 +144,10 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
-{ data: 'titulo', name: 'titulo' },
-{ data: 'nota', name: 'nota' },
 { data: 'programaacademico_nombreprograma', name: 'programaacademico.nombreprograma' },
 { data: 'programamodular_nombreprograma', name: 'programamodular.nombreprograma' },
-{ data: 'grupo_nombre', name: 'grupo.nombre' },
+{ data: 'titulo', name: 'titulo' },
+{ data: 'nota', name: 'nota' },
 { data: 'docente_dni', name: 'docente.dni' },
 { data: 'docente.direccion', name: 'docente.direccion' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }

@@ -34,9 +34,6 @@
                         {{ trans('cruds.periodo.fields.fechafin') }}
                     </th>
                     <th>
-                        {{ trans('cruds.periodo.fields.modo') }}
-                    </th>
-                    <th>
                         &nbsp;
                     </th>
                 </tr>
@@ -52,9 +49,6 @@
                     <td>
                     </td>
                     <td>
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                     </td>
@@ -115,11 +109,10 @@
 { data: 'periodo', name: 'periodo' },
 { data: 'fechainicio', name: 'fechainicio' },
 { data: 'fechafin', name: 'fechafin' },
-{ data: 'modo', name: 'modo' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,
-    order: [[ 1, 'desc' ]],
+    order: [[ 1, 'asc' ]],
     pageLength: 25,
   };
   let table = $('.datatable-Periodo').DataTable(dtOverrideGlobals);

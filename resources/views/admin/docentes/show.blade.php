@@ -68,7 +68,7 @@
                             {{ trans('cruds.docente.fields.tipo') }}
                         </th>
                         <td>
-                            {{ $docente->tipo }}
+                            {{ App\Models\Docente::TIPO_SELECT[$docente->tipo] ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -81,22 +81,6 @@
                                     <img src="{{ $docente->firma->getUrl('thumb') }}">
                                 </a>
                             @endif
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.docente.fields.persona') }}
-                        </th>
-                        <td>
-                            {{ $docente->persona->nombres ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.docente.fields.programa') }}
-                        </th>
-                        <td>
-                            {{ $docente->programa->nombre ?? '' }}
                         </td>
                     </tr>
                 </tbody>

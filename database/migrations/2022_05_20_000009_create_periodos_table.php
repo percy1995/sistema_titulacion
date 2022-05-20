@@ -13,7 +13,7 @@ class CreatePeriodosTable extends Migration
             $table->string('periodo');
             $table->date('fechainicio');
             $table->date('fechafin');
-            $table->string('modo');
+            $table->string('modo')->nullable();
             $table->string('estado')->nullable();
             $table->timestamps();
             $table->softDeletes();

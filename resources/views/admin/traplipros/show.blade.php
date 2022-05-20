@@ -25,22 +25,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.traplipro.fields.titulo') }}
-                        </th>
-                        <td>
-                            {{ $traplipro->titulo }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.traplipro.fields.nota') }}
-                        </th>
-                        <td>
-                            {{ $traplipro->nota }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.traplipro.fields.programaacademico') }}
                         </th>
                         <td>
@@ -57,10 +41,18 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.traplipro.fields.grupo') }}
+                            {{ trans('cruds.traplipro.fields.titulo') }}
                         </th>
                         <td>
-                            {{ $traplipro->grupo->nombre ?? '' }}
+                            {{ $traplipro->titulo }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.traplipro.fields.nota') }}
+                        </th>
+                        <td>
+                            {{ $traplipro->nota }}
                         </td>
                     </tr>
                     <tr>

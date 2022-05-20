@@ -25,30 +25,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.monitoreo.fields.grupo') }}
-                        </th>
-                        <td>
-                            {{ $monitoreo->grupo->nombre ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.monitoreo.fields.docente') }}
-                        </th>
-                        <td>
-                            {{ $monitoreo->docente->dni ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.monitoreo.fields.traplipro') }}
-                        </th>
-                        <td>
-                            {{ $monitoreo->traplipro->titulo ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.monitoreo.fields.fechaasesoria') }}
                         </th>
                         <td>
@@ -77,6 +53,18 @@
                         </th>
                         <td>
                             {{ $monitoreo->observacion }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.monitoreo.fields.archivo') }}
+                        </th>
+                        <td>
+                            @foreach($monitoreo->archivo as $key => $media)
+                                <a href="{{ $media->getUrl() }}" target="_blank">
+                                    {{ trans('global.view_file') }}
+                                </a>
+                            @endforeach
                         </td>
                     </tr>
                 </tbody>

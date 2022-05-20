@@ -44,7 +44,6 @@ class UpdateDocenteRequest extends FormRequest
                 'nullable',
             ],
             'tipo' => [
-                'string',
                 'required',
             ],
         ];

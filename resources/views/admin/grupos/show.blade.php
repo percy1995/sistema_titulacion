@@ -36,7 +36,7 @@
                             {{ trans('cruds.grupo.fields.dia') }}
                         </th>
                         <td>
-                            {{ $grupo->dia }}
+                            {{ App\Models\Grupo::DIA_SELECT[$grupo->dia] ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -60,7 +60,7 @@
                             {{ trans('cruds.grupo.fields.tipo') }}
                         </th>
                         <td>
-                            {{ $grupo->tipo }}
+                            {{ App\Models\Grupo::TIPO_SELECT[$grupo->tipo] ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -93,6 +93,14 @@
                         </th>
                         <td>
                             {{ $grupo->programaestudio->nombre ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.grupo.fields.tiposustentacion') }}
+                        </th>
+                        <td>
+                            {{ App\Models\Grupo::TIPOSUSTENTACION_SELECT[$grupo->tiposustentacion] ?? '' }}
                         </td>
                     </tr>
                 </tbody>

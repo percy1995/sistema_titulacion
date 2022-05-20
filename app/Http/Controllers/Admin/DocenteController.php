@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyDocenteRequest;
 use App\Http\Requests\StoreDocenteRequest;
@@ -19,6 +20,7 @@ use Yajra\DataTables\Facades\DataTables;
 class DocenteController extends Controller
 {
     use MediaUploadingTrait;
+    use CsvImportTrait;
 
     public function index(Request $request)
     {
@@ -65,7 +67,7 @@ class DocenteController extends Controller
                 return $row->celular ? $row->celular : '';
             });
             $table->editColumn('tipo', function ($row) {
-                return $row->tipo ? $row->tipo : '';
+                return $row->tipo ? Docente::TIPO_SELECT[$row->tipo] : '';
             });
             $table->editColumn('firma', function ($row) {
                 if ($photo = $row->firma) {

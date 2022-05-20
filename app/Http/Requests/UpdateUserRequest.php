@@ -32,10 +32,6 @@ class UpdateUserRequest extends FormRequest
                 'required',
                 'array',
             ],
-            'persona_id' => [
-                'required',
-                'integer',
-            ],
         ];
     }
 }

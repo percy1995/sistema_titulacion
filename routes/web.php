@@ -9,7 +9,8 @@ Route::get('/home', function () {
     return redirect()->route('admin.home');
 });
 
-Auth::routes(['register' => false]);
+Route::get('userVerification/{token}', 'UserVerificationController@approve')->name('userVerification');
+Auth::routes();
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
@@ -31,16 +32,22 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Programa
     Route::delete('programas/destroy', 'ProgramaController@massDestroy')->name('programas.massDestroy');
+    Route::post('programas/parse-csv-import', 'ProgramaController@parseCsvImport')->name('programas.parseCsvImport');
+    Route::post('programas/process-csv-import', 'ProgramaController@processCsvImport')->name('programas.processCsvImport');
     Route::resource('programas', 'ProgramaController');
 
     // Docente
     Route::delete('docentes/destroy', 'DocenteController@massDestroy')->name('docentes.massDestroy');
     Route::post('docentes/media', 'DocenteController@storeMedia')->name('docentes.storeMedia');
     Route::post('docentes/ckmedia', 'DocenteController@storeCKEditorImages')->name('docentes.storeCKEditorImages');
+    Route::post('docentes/parse-csv-import', 'DocenteController@parseCsvImport')->name('docentes.parseCsvImport');
+    Route::post('docentes/process-csv-import', 'DocenteController@processCsvImport')->name('docentes.processCsvImport');
     Route::resource('docentes', 'DocenteController');
 
     // Programa Modular
     Route::delete('programa-modulars/destroy', 'ProgramaModularController@massDestroy')->name('programa-modulars.massDestroy');
+    Route::post('programa-modulars/parse-csv-import', 'ProgramaModularController@parseCsvImport')->name('programa-modulars.parseCsvImport');
+    Route::post('programa-modulars/process-csv-import', 'ProgramaModularController@processCsvImport')->name('programa-modulars.processCsvImport');
     Route::resource('programa-modulars', 'ProgramaModularController');
 
     // Periodo
@@ -53,6 +60,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Traplipro
     Route::delete('traplipros/destroy', 'TrapliproController@massDestroy')->name('traplipros.massDestroy');
+    Route::post('traplipros/parse-csv-import', 'TrapliproController@parseCsvImport')->name('traplipros.parseCsvImport');
+    Route::post('traplipros/process-csv-import', 'TrapliproController@processCsvImport')->name('traplipros.processCsvImport');
     Route::resource('traplipros', 'TrapliproController');
 
     // Alumno
@@ -63,6 +72,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Monitoreo
     Route::delete('monitoreos/destroy', 'MonitoreoController@massDestroy')->name('monitoreos.massDestroy');
+    Route::post('monitoreos/media', 'MonitoreoController@storeMedia')->name('monitoreos.storeMedia');
+    Route::post('monitoreos/ckmedia', 'MonitoreoController@storeCKEditorImages')->name('monitoreos.storeCKEditorImages');
+    Route::post('monitoreos/parse-csv-import', 'MonitoreoController@parseCsvImport')->name('monitoreos.parseCsvImport');
+    Route::post('monitoreos/process-csv-import', 'MonitoreoController@processCsvImport')->name('monitoreos.processCsvImport');
     Route::resource('monitoreos', 'MonitoreoController');
 
     // User Alerts
@@ -86,6 +99,22 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Tasks Calendar
     Route::resource('tasks-calendars', 'TasksCalendarController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+
+    // Examen Sp
+    Route::delete('examen-sps/destroy', 'ExamenSpController@massDestroy')->name('examen-sps.massDestroy');
+    Route::post('examen-sps/media', 'ExamenSpController@storeMedia')->name('examen-sps.storeMedia');
+    Route::post('examen-sps/ckmedia', 'ExamenSpController@storeCKEditorImages')->name('examen-sps.storeCKEditorImages');
+    Route::post('examen-sps/parse-csv-import', 'ExamenSpController@parseCsvImport')->name('examen-sps.parseCsvImport');
+    Route::post('examen-sps/process-csv-import', 'ExamenSpController@processCsvImport')->name('examen-sps.processCsvImport');
+    Route::resource('examen-sps', 'ExamenSpController');
+
+    // Trabajo Practico
+    Route::delete('trabajo-practicos/destroy', 'TrabajoPracticoController@massDestroy')->name('trabajo-practicos.massDestroy');
+    Route::post('trabajo-practicos/media', 'TrabajoPracticoController@storeMedia')->name('trabajo-practicos.storeMedia');
+    Route::post('trabajo-practicos/ckmedia', 'TrabajoPracticoController@storeCKEditorImages')->name('trabajo-practicos.storeCKEditorImages');
+    Route::post('trabajo-practicos/parse-csv-import', 'TrabajoPracticoController@parseCsvImport')->name('trabajo-practicos.parseCsvImport');
+    Route::post('trabajo-practicos/process-csv-import', 'TrabajoPracticoController@processCsvImport')->name('trabajo-practicos.processCsvImport');
+    Route::resource('trabajo-practicos', 'TrabajoPracticoController');
 
     Route::get('messenger', 'MessengerController@index')->name('messenger.index');
     Route::get('messenger/create', 'MessengerController@createTopic')->name('messenger.createTopic');

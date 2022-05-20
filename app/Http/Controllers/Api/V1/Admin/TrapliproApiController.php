@@ -17,7 +17,7 @@ class TrapliproApiController extends Controller
     {
         abort_if(Gate::denies('traplipro_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new TrapliproResource(Traplipro::with(['programaacademico', 'programamodular', 'grupo', 'docente'])->get());
+        return new TrapliproResource(Traplipro::with(['programaacademico', 'programamodular', 'docente', 'grupo'])->get());
     }
 
     public function store(StoreTrapliproRequest $request)
@@ -33,7 +33,7 @@ class TrapliproApiController extends Controller
     {
         abort_if(Gate::denies('traplipro_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new TrapliproResource($traplipro->load(['programaacademico', 'programamodular', 'grupo', 'docente']));
+        return new TrapliproResource($traplipro->load(['programaacademico', 'programamodular', 'docente', 'grupo']));
     }
 
     public function update(UpdateTrapliproRequest $request, Traplipro $traplipro)

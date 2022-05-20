@@ -11,11 +11,12 @@ class CreateGruposTable extends Migration
         Schema::create('grupos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre')->nullable();
-            $table->string('dia');
+            $table->string('dia')->nullable();
             $table->time('horainicio');
             $table->date('horafin');
             $table->string('tipo');
             $table->string('aula');
+            $table->string('tiposustentacion')->nullable();
             $table->integer('estado')->nullable();
             $table->timestamps();
             $table->softDeletes();

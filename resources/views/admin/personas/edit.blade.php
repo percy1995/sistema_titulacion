@@ -14,7 +14,9 @@
                 <label class="required" for="nombres">{{ trans('cruds.persona.fields.nombres') }}</label>
                 <input class="form-control {{ $errors->has('nombres') ? 'is-invalid' : '' }}" type="text" name="nombres" id="nombres" value="{{ old('nombres', $persona->nombres) }}" required>
                 @if($errors->has('nombres'))
-                    <span class="text-danger">{{ $errors->first('nombres') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('nombres') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.persona.fields.nombres_helper') }}</span>
             </div>
@@ -22,7 +24,9 @@
                 <label class="required" for="apellidos">{{ trans('cruds.persona.fields.apellidos') }}</label>
                 <input class="form-control {{ $errors->has('apellidos') ? 'is-invalid' : '' }}" type="text" name="apellidos" id="apellidos" value="{{ old('apellidos', $persona->apellidos) }}" required>
                 @if($errors->has('apellidos'))
-                    <span class="text-danger">{{ $errors->first('apellidos') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('apellidos') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.persona.fields.apellidos_helper') }}</span>
             </div>

@@ -49,12 +49,12 @@ class Traplipro extends Model
     ];
 
     protected $fillable = [
-        'titulo',
-        'nota',
         'programaacademico_id',
         'programamodular_id',
-        'grupo_id',
+        'titulo',
+        'nota',
         'docente_id',
+        'grupo_id',
         'c_1',
         'c_2',
         'c_3',
@@ -81,14 +81,14 @@ class Traplipro extends Model
         return $this->belongsTo(ProgramaModular::class, 'programamodular_id');
     }
 
-    public function grupo()
-    {
-        return $this->belongsTo(Grupo::class, 'grupo_id');
-    }
-
     public function docente()
     {
         return $this->belongsTo(Docente::class, 'docente_id');
+    }
+
+    public function grupo()
+    {
+        return $this->belongsTo(Grupo::class, 'grupo_id');
     }
 
     protected function serializeDate(DateTimeInterface $date)

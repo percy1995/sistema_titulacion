@@ -16,6 +16,13 @@ class Docente extends Model implements HasMedia
     use InteractsWithMedia;
     use HasFactory;
 
+    public const TIPO_SELECT = [
+        'Asesor'                => 'asesor',
+        'Jefe Unidad Academica' => 'Jefe Unidad Academica',
+        'Coordinador Academica' => 'Coordinador Academica',
+        'Director General'      => 'Director General',
+    ];
+
     public $table = 'docentes';
 
     protected $appends = [

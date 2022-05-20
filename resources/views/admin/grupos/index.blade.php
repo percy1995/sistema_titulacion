@@ -46,10 +46,10 @@
                         {{ trans('cruds.grupo.fields.periodo') }}
                     </th>
                     <th>
-                        {{ trans('cruds.grupo.fields.docente') }}
+                        {{ trans('cruds.grupo.fields.programaestudio') }}
                     </th>
                     <th>
-                        {{ trans('cruds.grupo.fields.programaestudio') }}
+                        {{ trans('cruds.grupo.fields.tiposustentacion') }}
                     </th>
                     <th>
                         &nbsp;
@@ -65,14 +65,24 @@
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        <select class="search" strict="true">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach(App\Models\Grupo::DIA_SELECT as $key => $item)
+                                <option value="{{ $key }}">{{ $item }}</option>
+                            @endforeach
+                        </select>
                     </td>
                     <td>
                     </td>
                     <td>
                     </td>
                     <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        <select class="search" strict="true">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach(App\Models\Grupo::TIPO_SELECT as $key => $item)
+                                <option value="{{ $key }}">{{ $item }}</option>
+                            @endforeach
+                        </select>
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -88,16 +98,16 @@
                     <td>
                         <select class="search">
                             <option value>{{ trans('global.all') }}</option>
-                            @foreach($docentes as $key => $item)
-                                <option value="{{ $item->dni }}">{{ $item->dni }}</option>
+                            @foreach($programas as $key => $item)
+                                <option value="{{ $item->nombre }}">{{ $item->nombre }}</option>
                             @endforeach
                         </select>
                     </td>
                     <td>
-                        <select class="search">
+                        <select class="search" strict="true">
                             <option value>{{ trans('global.all') }}</option>
-                            @foreach($programas as $key => $item)
-                                <option value="{{ $item->nombre }}">{{ $item->nombre }}</option>
+                            @foreach(App\Models\Grupo::TIPOSUSTENTACION_SELECT as $key => $item)
+                                <option value="{{ $key }}">{{ $item }}</option>
                             @endforeach
                         </select>
                     </td>
@@ -164,8 +174,8 @@
 { data: 'tipo', name: 'tipo' },
 { data: 'aula', name: 'aula' },
 { data: 'periodo_periodo', name: 'periodo.periodo' },
-{ data: 'docente_dni', name: 'docente.dni' },
 { data: 'programaestudio_nombre', name: 'programaestudio.nombre' },
+{ data: 'tiposustentacion', name: 'tiposustentacion' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

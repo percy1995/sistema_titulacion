@@ -52,6 +52,12 @@ class UsersController extends Controller
                 return $row->email ? $row->email : '';
             });
 
+            $table->editColumn('approved', function ($row) {
+                return '<input type="checkbox" disabled ' . ($row->approved ? 'checked' : null) . '>';
+            });
+            $table->editColumn('verified', function ($row) {
+                return '<input type="checkbox" disabled ' . ($row->verified ? 'checked' : null) . '>';
+            });
             $table->editColumn('roles', function ($row) {
                 $labels = [];
                 foreach ($row->roles as $role) {
@@ -60,11 +66,8 @@ class UsersController extends Controller
 
                 return implode(' ', $labels);
             });
-            $table->addColumn('persona_nombres', function ($row) {
-                return $row->persona ? $row->persona->nombres : '';
-            });
 
-            $table->rawColumns(['actions', 'placeholder', 'roles', 'persona']);
+            $table->rawColumns(['actions', 'placeholder', 'approved', 'verified', 'roles']);
 
             return $table->make(true);
         }
@@ -81,9 +84,7 @@ class UsersController extends Controller
 
         $roles = Role::pluck('title', 'id');
 
-        $personas = Persona::pluck('nombres', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        return view('admin.users.create', compact('personas', 'roles'));
+        return view('admin.users.create', compact('roles'));
     }
 
     public function store(StoreUserRequest $request)
@@ -100,11 +101,9 @@ class UsersController extends Controller
 
         $roles = Role::pluck('title', 'id');
 
-        $personas = Persona::pluck('nombres', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $user->load('roles', 'persona');
 
-        return view('admin.users.edit', compact('personas', 'roles', 'user'));
+        return view('admin.users.edit', compact('roles', 'user'));
     }
 
     public function update(UpdateUserRequest $request, User $user)

@@ -37,5 +37,14 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     Route::apiResource('alumnos', 'AlumnoApiController');
 
     // Monitoreo
+    Route::post('monitoreos/media', 'MonitoreoApiController@storeMedia')->name('monitoreos.storeMedia');
     Route::apiResource('monitoreos', 'MonitoreoApiController');
+
+    // Examen Sp
+    Route::post('examen-sps/media', 'ExamenSpApiController@storeMedia')->name('examen-sps.storeMedia');
+    Route::apiResource('examen-sps', 'ExamenSpApiController');
+
+    // Trabajo Practico
+    Route::post('trabajo-practicos/media', 'TrabajoPracticoApiController@storeMedia')->name('trabajo-practicos.storeMedia');
+    Route::apiResource('trabajo-practicos', 'TrabajoPracticoApiController');
 });

@@ -11,72 +11,55 @@
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label for="grupo_id">{{ trans('cruds.monitoreo.fields.grupo') }}</label>
-                <select class="form-control select2 {{ $errors->has('grupo') ? 'is-invalid' : '' }}" name="grupo_id" id="grupo_id">
-                    @foreach($grupos as $id => $entry)
-                        <option value="{{ $id }}" {{ (old('grupo_id') ? old('grupo_id') : $monitoreo->grupo->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('grupo'))
-                    <span class="text-danger">{{ $errors->first('grupo') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.monitoreo.fields.grupo_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="docente_id">{{ trans('cruds.monitoreo.fields.docente') }}</label>
-                <select class="form-control select2 {{ $errors->has('docente') ? 'is-invalid' : '' }}" name="docente_id" id="docente_id">
-                    @foreach($docentes as $id => $entry)
-                        <option value="{{ $id }}" {{ (old('docente_id') ? old('docente_id') : $monitoreo->docente->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('docente'))
-                    <span class="text-danger">{{ $errors->first('docente') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.monitoreo.fields.docente_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="traplipro_id">{{ trans('cruds.monitoreo.fields.traplipro') }}</label>
-                <select class="form-control select2 {{ $errors->has('traplipro') ? 'is-invalid' : '' }}" name="traplipro_id" id="traplipro_id">
-                    @foreach($traplipros as $id => $entry)
-                        <option value="{{ $id }}" {{ (old('traplipro_id') ? old('traplipro_id') : $monitoreo->traplipro->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('traplipro'))
-                    <span class="text-danger">{{ $errors->first('traplipro') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.monitoreo.fields.traplipro_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label for="fechaasesoria">{{ trans('cruds.monitoreo.fields.fechaasesoria') }}</label>
                 <input class="form-control date {{ $errors->has('fechaasesoria') ? 'is-invalid' : '' }}" type="text" name="fechaasesoria" id="fechaasesoria" value="{{ old('fechaasesoria', $monitoreo->fechaasesoria) }}">
                 @if($errors->has('fechaasesoria'))
-                    <span class="text-danger">{{ $errors->first('fechaasesoria') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('fechaasesoria') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.monitoreo.fields.fechaasesoria_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="horainicio">{{ trans('cruds.monitoreo.fields.horainicio') }}</label>
-                <input class="form-control timepicker {{ $errors->has('horainicio') ? 'is-invalid' : '' }}" type="text" name="horainicio" id="horainicio" value="{{ old('horainicio', $monitoreo->horainicio) }}">
+                <label class="required" for="horainicio">{{ trans('cruds.monitoreo.fields.horainicio') }}</label>
+                <input class="form-control timepicker {{ $errors->has('horainicio') ? 'is-invalid' : '' }}" type="text" name="horainicio" id="horainicio" value="{{ old('horainicio', $monitoreo->horainicio) }}" required>
                 @if($errors->has('horainicio'))
-                    <span class="text-danger">{{ $errors->first('horainicio') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('horainicio') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.monitoreo.fields.horainicio_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="horafin">{{ trans('cruds.monitoreo.fields.horafin') }}</label>
-                <input class="form-control timepicker {{ $errors->has('horafin') ? 'is-invalid' : '' }}" type="text" name="horafin" id="horafin" value="{{ old('horafin', $monitoreo->horafin) }}">
+                <label class="required" for="horafin">{{ trans('cruds.monitoreo.fields.horafin') }}</label>
+                <input class="form-control timepicker {{ $errors->has('horafin') ? 'is-invalid' : '' }}" type="text" name="horafin" id="horafin" value="{{ old('horafin', $monitoreo->horafin) }}" required>
                 @if($errors->has('horafin'))
-                    <span class="text-danger">{{ $errors->first('horafin') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('horafin') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.monitoreo.fields.horafin_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="observacion">{{ trans('cruds.monitoreo.fields.observacion') }}</label>
-                <textarea class="form-control {{ $errors->has('observacion') ? 'is-invalid' : '' }}" name="observacion" id="observacion">{{ old('observacion', $monitoreo->observacion) }}</textarea>
+                <label class="required" for="observacion">{{ trans('cruds.monitoreo.fields.observacion') }}</label>
+                <textarea class="form-control {{ $errors->has('observacion') ? 'is-invalid' : '' }}" name="observacion" id="observacion" required>{{ old('observacion', $monitoreo->observacion) }}</textarea>
                 @if($errors->has('observacion'))
-                    <span class="text-danger">{{ $errors->first('observacion') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('observacion') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.monitoreo.fields.observacion_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="archivo">{{ trans('cruds.monitoreo.fields.archivo') }}</label>
+                <div class="needsclick dropzone {{ $errors->has('archivo') ? 'is-invalid' : '' }}" id="archivo-dropzone">
+                </div>
+                @if($errors->has('archivo'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('archivo') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.monitoreo.fields.archivo_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
@@ -89,4 +72,63 @@
 
 
 
+@endsection
+
+@section('scripts')
+<script>
+    var uploadedArchivoMap = {}
+Dropzone.options.archivoDropzone = {
+    url: '{{ route('admin.monitoreos.storeMedia') }}',
+    maxFilesize: 20, // MB
+    addRemoveLinks: true,
+    headers: {
+      'X-CSRF-TOKEN': "{{ csrf_token() }}"
+    },
+    params: {
+      size: 20
+    },
+    success: function (file, response) {
+      $('form').append('<input type="hidden" name="archivo[]" value="' + response.name + '">')
+      uploadedArchivoMap[file.name] = response.name
+    },
+    removedfile: function (file) {
+      file.previewElement.remove()
+      var name = ''
+      if (typeof file.file_name !== 'undefined') {
+        name = file.file_name
+      } else {
+        name = uploadedArchivoMap[file.name]
+      }
+      $('form').find('input[name="archivo[]"][value="' + name + '"]').remove()
+    },
+    init: function () {
+@if(isset($monitoreo) && $monitoreo->archivo)
+          var files =
+            {!! json_encode($monitoreo->archivo) !!}
+              for (var i in files) {
+              var file = files[i]
+              this.options.addedfile.call(this, file)
+              file.previewElement.classList.add('dz-complete')
+              $('form').append('<input type="hidden" name="archivo[]" value="' + file.file_name + '">')
+            }
+@endif
+    },
+     error: function (file, response) {
+         if ($.type(response) === 'string') {
+             var message = response //dropzone sends it's own error messages in string
+         } else {
+             var message = response.errors.file
+         }
+         file.previewElement.classList.add('dz-error')
+         _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
+         _results = []
+         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+             node = _ref[_i]
+             _results.push(node.textContent = message)
+         }
+
+         return _results
+     }
+}
+</script>
 @endsection

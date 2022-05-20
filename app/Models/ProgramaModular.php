@@ -21,8 +21,8 @@ class ProgramaModular extends Model
     ];
 
     protected $fillable = [
-        'nombreprograma',
         'programaacademico_id',
+        'nombreprograma',
         'created_at',
         'updated_at',
         'deleted_at',

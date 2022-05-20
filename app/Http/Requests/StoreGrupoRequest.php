@@ -21,10 +21,6 @@ class StoreGrupoRequest extends FormRequest
                 'string',
                 'nullable',
             ],
-            'dia' => [
-                'string',
-                'required',
-            ],
             'horainicio' => [
                 'required',
                 'date_format:' . config('panel.time_format'),
@@ -34,7 +30,6 @@ class StoreGrupoRequest extends FormRequest
                 'date_format:' . config('panel.date_format'),
             ],
             'tipo' => [
-                'string',
                 'required',
             ],
             'aula' => [

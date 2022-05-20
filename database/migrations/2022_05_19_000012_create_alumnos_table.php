@@ -10,10 +10,10 @@ class CreateAlumnosTable extends Migration
     {
         Schema::create('alumnos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombres')->nullable();
-            $table->string('apellidos')->nullable();
+            $table->string('nombres');
+            $table->string('apellidos');
             $table->string('correo');
-            $table->string('dni')->nullable();
+            $table->string('dni');
             $table->integer('estado')->nullable();
             $table->timestamps();
             $table->softDeletes();

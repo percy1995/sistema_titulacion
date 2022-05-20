@@ -25,14 +25,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.alumno.fields.traplipro') }}
-                        </th>
-                        <td>
-                            {{ $alumno->traplipro->titulo ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.alumno.fields.nombres') }}
                         </th>
                         <td>
@@ -61,18 +53,6 @@
                         </th>
                         <td>
                             {{ $alumno->dni }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.alumno.fields.firma') }}
-                        </th>
-                        <td>
-                            @if($alumno->firma)
-                                <a href="{{ $alumno->firma->getUrl() }}" target="_blank" style="display: inline-block">
-                                    <img src="{{ $alumno->firma->getUrl('thumb') }}">
-                                </a>
-                            @endif
                         </td>
                     </tr>
                 </tbody>

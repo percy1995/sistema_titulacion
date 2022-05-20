@@ -348,6 +348,50 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 85,
+                'title' => 'titulacion_ex_access',
+            ],
+            [
+                'id'    => 86,
+                'title' => 'examen_sp_create',
+            ],
+            [
+                'id'    => 87,
+                'title' => 'examen_sp_edit',
+            ],
+            [
+                'id'    => 88,
+                'title' => 'examen_sp_show',
+            ],
+            [
+                'id'    => 89,
+                'title' => 'examen_sp_delete',
+            ],
+            [
+                'id'    => 90,
+                'title' => 'examen_sp_access',
+            ],
+            [
+                'id'    => 91,
+                'title' => 'trabajo_practico_create',
+            ],
+            [
+                'id'    => 92,
+                'title' => 'trabajo_practico_edit',
+            ],
+            [
+                'id'    => 93,
+                'title' => 'trabajo_practico_show',
+            ],
+            [
+                'id'    => 94,
+                'title' => 'trabajo_practico_delete',
+            ],
+            [
+                'id'    => 95,
+                'title' => 'trabajo_practico_access',
+            ],
+            [
+                'id'    => 96,
                 'title' => 'profile_password_edit',
             ],
         ];

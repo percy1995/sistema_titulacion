@@ -34,10 +34,13 @@
                         {{ trans('cruds.user.fields.email_verified_at') }}
                     </th>
                     <th>
-                        {{ trans('cruds.user.fields.roles') }}
+                        {{ trans('cruds.user.fields.approved') }}
                     </th>
                     <th>
-                        {{ trans('cruds.user.fields.persona') }}
+                        {{ trans('cruds.user.fields.verified') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.user.fields.roles') }}
                     </th>
                     <th>
                         &nbsp;
@@ -59,18 +62,14 @@
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($roles as $key => $item)
-                                <option value="{{ $item->title }}">{{ $item->title }}</option>
-                            @endforeach
-                        </select>
+                    </td>
+                    <td>
                     </td>
                     <td>
                         <select class="search">
                             <option value>{{ trans('global.all') }}</option>
-                            @foreach($personas as $key => $item)
-                                <option value="{{ $item->nombres }}">{{ $item->nombres }}</option>
+                            @foreach($roles as $key => $item)
+                                <option value="{{ $item->title }}">{{ $item->title }}</option>
                             @endforeach
                         </select>
                     </td>
@@ -133,8 +132,9 @@
 { data: 'name', name: 'name' },
 { data: 'email', name: 'email' },
 { data: 'email_verified_at', name: 'email_verified_at' },
+{ data: 'approved', name: 'approved' },
+{ data: 'verified', name: 'verified' },
 { data: 'roles', name: 'roles.title' },
-{ data: 'persona_nombres', name: 'persona.nombres' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

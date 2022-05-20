@@ -6,6 +6,10 @@
             <a class="btn btn-success" href="{{ route('admin.docentes.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.docente.title_singular') }}
             </a>
+            <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
+                {{ trans('global.app_csvImport') }}
+            </button>
+            @include('csvImport.modal', ['model' => 'Docente', 'route' => 'admin.docentes.parseCsvImport'])
         </div>
     </div>
 @endcan
@@ -71,7 +75,12 @@
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        <select class="search" strict="true">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach(App\Models\Docente::TIPO_SELECT as $key => $item)
+                                <option value="{{ $key }}">{{ $item }}</option>
+                            @endforeach
+                        </select>
                     </td>
                     <td>
                     </td>

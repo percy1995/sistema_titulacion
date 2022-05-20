@@ -7,13 +7,21 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Monitoreo extends Model
+class Monitoreo extends Model implements HasMedia
 {
     use SoftDeletes;
+    use InteractsWithMedia;
     use HasFactory;
 
     public $table = 'monitoreos';
+
+    protected $appends = [
+        'archivo',
+    ];
 
     protected $dates = [
         'fechaasesoria',
@@ -35,6 +43,12 @@ class Monitoreo extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')->fit('crop', 50, 50);
+        $this->addMediaConversion('preview')->fit('crop', 120, 120);
+    }
 
     public function grupo()
     {
@@ -59,6 +73,11 @@ class Monitoreo extends Model
     public function setFechaasesoriaAttribute($value)
     {
         $this->attributes['fechaasesoria'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    }
+
+    public function getArchivoAttribute()
+    {
+        return $this->getMedia('archivo');
     }
 
     protected function serializeDate(DateTimeInterface $date)

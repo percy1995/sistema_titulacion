@@ -19,11 +19,11 @@ class StoreAlumnoRequest extends FormRequest
         return [
             'nombres' => [
                 'string',
-                'nullable',
+                'required',
             ],
             'apellidos' => [
                 'string',
-                'nullable',
+                'required',
             ],
             'correo' => [
                 'string',
@@ -31,7 +31,7 @@ class StoreAlumnoRequest extends FormRequest
             ],
             'dni' => [
                 'string',
-                'nullable',
+                'required',
             ],
         ];
     }

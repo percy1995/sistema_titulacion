@@ -47,14 +47,6 @@
                             {{ $periodo->fechafin }}
                         </td>
                     </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.periodo.fields.modo') }}
-                        </th>
-                        <td>
-                            {{ $periodo->modo }}
-                        </td>
-                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

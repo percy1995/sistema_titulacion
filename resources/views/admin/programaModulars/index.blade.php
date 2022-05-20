@@ -6,6 +6,10 @@
             <a class="btn btn-success" href="{{ route('admin.programa-modulars.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.programaModular.title_singular') }}
             </a>
+            <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
+                {{ trans('global.app_csvImport') }}
+            </button>
+            @include('csvImport.modal', ['model' => 'ProgramaModular', 'route' => 'admin.programa-modulars.parseCsvImport'])
         </div>
     </div>
 @endcan
@@ -25,10 +29,10 @@
                         {{ trans('cruds.programaModular.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.programaModular.fields.nombreprograma') }}
+                        {{ trans('cruds.programaModular.fields.programaacademico') }}
                     </th>
                     <th>
-                        {{ trans('cruds.programaModular.fields.programaacademico') }}
+                        {{ trans('cruds.programaModular.fields.nombreprograma') }}
                     </th>
                     <th>
                         &nbsp;
@@ -41,15 +45,15 @@
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
                         <select class="search">
                             <option value>{{ trans('global.all') }}</option>
                             @foreach($programas as $key => $item)
                                 <option value="{{ $item->nombre }}">{{ $item->nombre }}</option>
                             @endforeach
                         </select>
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                     </td>
@@ -107,8 +111,8 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
-{ data: 'nombreprograma', name: 'nombreprograma' },
 { data: 'programaacademico_nombre', name: 'programaacademico.nombre' },
+{ data: 'nombreprograma', name: 'nombreprograma' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

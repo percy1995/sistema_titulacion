@@ -47,10 +47,6 @@ class PeriodoController extends Controller
                 return $row->periodo ? $row->periodo : '';
             });
 
-            $table->editColumn('modo', function ($row) {
-                return $row->modo ? $row->modo : '';
-            });
-
             $table->rawColumns(['actions', 'placeholder']);
 
             return $table->make(true);

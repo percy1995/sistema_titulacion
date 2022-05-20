@@ -68,7 +68,7 @@
                             {{ trans('cruds.docente.fields.tipo') }}
                         </th>
                         <td>
-                            {{ $docente->tipo }}
+                            {{ App\Models\Docente::TIPO_SELECT[$docente->tipo] ?? '' }}
                         </td>
                     </tr>
                     <tr>

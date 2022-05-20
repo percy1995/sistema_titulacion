@@ -10,14 +10,6 @@
         <form method="POST" action="{{ route("admin.programa-modulars.store") }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label class="required" for="nombreprograma">{{ trans('cruds.programaModular.fields.nombreprograma') }}</label>
-                <input class="form-control {{ $errors->has('nombreprograma') ? 'is-invalid' : '' }}" type="text" name="nombreprograma" id="nombreprograma" value="{{ old('nombreprograma', '') }}" required>
-                @if($errors->has('nombreprograma'))
-                    <span class="text-danger">{{ $errors->first('nombreprograma') }}</span>
-                @endif
-                <span class="help-block">{{ trans('cruds.programaModular.fields.nombreprograma_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label for="programaacademico_id">{{ trans('cruds.programaModular.fields.programaacademico') }}</label>
                 <select class="form-control select2 {{ $errors->has('programaacademico') ? 'is-invalid' : '' }}" name="programaacademico_id" id="programaacademico_id">
                     @foreach($programaacademicos as $id => $entry)
@@ -25,9 +17,21 @@
                     @endforeach
                 </select>
                 @if($errors->has('programaacademico'))
-                    <span class="text-danger">{{ $errors->first('programaacademico') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('programaacademico') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.programaModular.fields.programaacademico_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="nombreprograma">{{ trans('cruds.programaModular.fields.nombreprograma') }}</label>
+                <input class="form-control {{ $errors->has('nombreprograma') ? 'is-invalid' : '' }}" type="text" name="nombreprograma" id="nombreprograma" value="{{ old('nombreprograma', '') }}" required>
+                @if($errors->has('nombreprograma'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('nombreprograma') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.programaModular.fields.nombreprograma_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

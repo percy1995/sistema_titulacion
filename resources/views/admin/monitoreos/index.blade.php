@@ -6,6 +6,10 @@
             <a class="btn btn-success" href="{{ route('admin.monitoreos.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.monitoreo.title_singular') }}
             </a>
+            <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
+                {{ trans('global.app_csvImport') }}
+            </button>
+            @include('csvImport.modal', ['model' => 'Monitoreo', 'route' => 'admin.monitoreos.parseCsvImport'])
         </div>
     </div>
 @endcan
@@ -25,16 +29,19 @@
                         {{ trans('cruds.monitoreo.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.monitoreo.fields.grupo') }}
+                        {{ trans('cruds.monitoreo.fields.fechaasesoria') }}
                     </th>
                     <th>
-                        {{ trans('cruds.monitoreo.fields.docente') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.monitoreo.fields.traplipro') }}
+                        {{ trans('cruds.monitoreo.fields.horainicio') }}
                     </th>
                     <th>
                         {{ trans('cruds.monitoreo.fields.horafin') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.monitoreo.fields.observacion') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.monitoreo.fields.archivo') }}
                     </th>
                     <th>
                         &nbsp;
@@ -47,28 +54,13 @@
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($grupos as $key => $item)
-                                <option value="{{ $item->nombre }}">{{ $item->nombre }}</option>
-                            @endforeach
-                        </select>
                     </td>
                     <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($docentes as $key => $item)
-                                <option value="{{ $item->dni }}">{{ $item->dni }}</option>
-                            @endforeach
-                        </select>
                     </td>
                     <td>
-                        <select class="search">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach($traplipros as $key => $item)
-                                <option value="{{ $item->titulo }}">{{ $item->titulo }}</option>
-                            @endforeach
-                        </select>
+                    </td>
+                    <td>
+                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                     </td>
@@ -128,10 +120,11 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
-{ data: 'grupo_nombre', name: 'grupo.nombre' },
-{ data: 'docente_dni', name: 'docente.dni' },
-{ data: 'traplipro_titulo', name: 'traplipro.titulo' },
+{ data: 'fechaasesoria', name: 'fechaasesoria' },
+{ data: 'horainicio', name: 'horainicio' },
 { data: 'horafin', name: 'horafin' },
+{ data: 'observacion', name: 'observacion' },
+{ data: 'archivo', name: 'archivo', sortable: false, searchable: false },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     orderCellsTop: true,

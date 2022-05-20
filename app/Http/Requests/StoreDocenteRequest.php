@@ -44,7 +44,6 @@ class StoreDocenteRequest extends FormRequest
                 'nullable',
             ],
             'tipo' => [
-                'string',
                 'required',
             ],
         ];

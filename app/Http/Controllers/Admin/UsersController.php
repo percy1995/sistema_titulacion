@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -16,6 +17,8 @@ use Yajra\DataTables\Facades\DataTables;
 
 class UsersController extends Controller
 {
+    use CsvImportTrait;
+
     public function index(Request $request)
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -52,6 +55,12 @@ class UsersController extends Controller
                 return $row->email ? $row->email : '';
             });
 
+            $table->editColumn('approved', function ($row) {
+                return '<input type="checkbox" disabled ' . ($row->approved ? 'checked' : null) . '>';
+            });
+            $table->editColumn('verified', function ($row) {
+                return '<input type="checkbox" disabled ' . ($row->verified ? 'checked' : null) . '>';
+            });
             $table->editColumn('roles', function ($row) {
                 $labels = [];
                 foreach ($row->roles as $role) {
@@ -64,7 +73,7 @@ class UsersController extends Controller
                 return $row->persona ? $row->persona->nombres : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'roles', 'persona']);
+            $table->rawColumns(['actions', 'placeholder', 'approved', 'verified', 'roles', 'persona']);
 
             return $table->make(true);
         }

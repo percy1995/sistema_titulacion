@@ -31,7 +31,7 @@ class UpdateDocenteRequest extends FormRequest
             'correoinstitucional' => [
                 'string',
                 'max:255',
-                'nullable',
+                'required',
             ],
             'correopersonal' => [
                 'string',
@@ -44,7 +44,6 @@ class UpdateDocenteRequest extends FormRequest
                 'nullable',
             ],
             'tipo' => [
-                'string',
                 'required',
             ],
         ];

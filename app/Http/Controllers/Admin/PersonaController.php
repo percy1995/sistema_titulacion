@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyPersonaRequest;
 use App\Http\Requests\StorePersonaRequest;
 use App\Http\Requests\UpdatePersonaRequest;
@@ -14,6 +15,8 @@ use Yajra\DataTables\Facades\DataTables;
 
 class PersonaController extends Controller
 {
+    use CsvImportTrait;
+
     public function index(Request $request)
     {
         abort_if(Gate::denies('persona_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');

@@ -14,39 +14,59 @@
                 <label for="nombre">{{ trans('cruds.grupo.fields.nombre') }}</label>
                 <input class="form-control {{ $errors->has('nombre') ? 'is-invalid' : '' }}" type="text" name="nombre" id="nombre" value="{{ old('nombre', $grupo->nombre) }}">
                 @if($errors->has('nombre'))
-                    <span class="text-danger">{{ $errors->first('nombre') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('nombre') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.grupo.fields.nombre_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="dia">{{ trans('cruds.grupo.fields.dia') }}</label>
-                <input class="form-control {{ $errors->has('dia') ? 'is-invalid' : '' }}" type="text" name="dia" id="dia" value="{{ old('dia', $grupo->dia) }}" required>
+                <label>{{ trans('cruds.grupo.fields.dia') }}</label>
+                <select class="form-control {{ $errors->has('dia') ? 'is-invalid' : '' }}" name="dia" id="dia">
+                    <option value disabled {{ old('dia', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Models\Grupo::DIA_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('dia', $grupo->dia) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
                 @if($errors->has('dia'))
-                    <span class="text-danger">{{ $errors->first('dia') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('dia') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.grupo.fields.dia_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="horainicio">{{ trans('cruds.grupo.fields.horainicio') }}</label>
-                <input class="form-control timepicker {{ $errors->has('horainicio') ? 'is-invalid' : '' }}" type="text" name="horainicio" id="horainicio" value="{{ old('horainicio', $grupo->horainicio) }}" required>
+                <label for="horainicio">{{ trans('cruds.grupo.fields.horainicio') }}</label>
+                <input class="form-control timepicker {{ $errors->has('horainicio') ? 'is-invalid' : '' }}" type="text" name="horainicio" id="horainicio" value="{{ old('horainicio', $grupo->horainicio) }}">
                 @if($errors->has('horainicio'))
-                    <span class="text-danger">{{ $errors->first('horainicio') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('horainicio') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.grupo.fields.horainicio_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="horafin">{{ trans('cruds.grupo.fields.horafin') }}</label>
-                <input class="form-control date {{ $errors->has('horafin') ? 'is-invalid' : '' }}" type="text" name="horafin" id="horafin" value="{{ old('horafin', $grupo->horafin) }}" required>
+                <label for="horafin">{{ trans('cruds.grupo.fields.horafin') }}</label>
+                <input class="form-control timepicker {{ $errors->has('horafin') ? 'is-invalid' : '' }}" type="text" name="horafin" id="horafin" value="{{ old('horafin', $grupo->horafin) }}">
                 @if($errors->has('horafin'))
-                    <span class="text-danger">{{ $errors->first('horafin') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('horafin') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.grupo.fields.horafin_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="tipo">{{ trans('cruds.grupo.fields.tipo') }}</label>
-                <input class="form-control {{ $errors->has('tipo') ? 'is-invalid' : '' }}" type="text" name="tipo" id="tipo" value="{{ old('tipo', $grupo->tipo) }}" required>
+                <label class="required">{{ trans('cruds.grupo.fields.tipo') }}</label>
+                <select class="form-control {{ $errors->has('tipo') ? 'is-invalid' : '' }}" name="tipo" id="tipo" required>
+                    <option value disabled {{ old('tipo', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Models\Grupo::TIPO_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('tipo', $grupo->tipo) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
                 @if($errors->has('tipo'))
-                    <span class="text-danger">{{ $errors->first('tipo') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('tipo') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.grupo.fields.tipo_helper') }}</span>
             </div>
@@ -54,7 +74,9 @@
                 <label class="required" for="aula">{{ trans('cruds.grupo.fields.aula') }}</label>
                 <input class="form-control {{ $errors->has('aula') ? 'is-invalid' : '' }}" type="text" name="aula" id="aula" value="{{ old('aula', $grupo->aula) }}" required>
                 @if($errors->has('aula'))
-                    <span class="text-danger">{{ $errors->first('aula') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('aula') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.grupo.fields.aula_helper') }}</span>
             </div>
@@ -66,7 +88,9 @@
                     @endforeach
                 </select>
                 @if($errors->has('periodo'))
-                    <span class="text-danger">{{ $errors->first('periodo') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('periodo') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.grupo.fields.periodo_helper') }}</span>
             </div>
@@ -78,7 +102,9 @@
                     @endforeach
                 </select>
                 @if($errors->has('docente'))
-                    <span class="text-danger">{{ $errors->first('docente') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('docente') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.grupo.fields.docente_helper') }}</span>
             </div>
@@ -90,9 +116,26 @@
                     @endforeach
                 </select>
                 @if($errors->has('programaestudio'))
-                    <span class="text-danger">{{ $errors->first('programaestudio') }}</span>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('programaestudio') }}
+                    </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.grupo.fields.programaestudio_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label>{{ trans('cruds.grupo.fields.tiposustentacion') }}</label>
+                <select class="form-control {{ $errors->has('tiposustentacion') ? 'is-invalid' : '' }}" name="tiposustentacion" id="tiposustentacion">
+                    <option value disabled {{ old('tiposustentacion', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\Models\Grupo::TIPOSUSTENTACION_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('tiposustentacion', $grupo->tiposustentacion) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('tiposustentacion'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('tiposustentacion') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.grupo.fields.tiposustentacion_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">

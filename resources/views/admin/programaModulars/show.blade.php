@@ -25,18 +25,18 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.programaModular.fields.nombreprograma') }}
-                        </th>
-                        <td>
-                            {{ $programaModular->nombreprograma }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.programaModular.fields.programaacademico') }}
                         </th>
                         <td>
                             {{ $programaModular->programaacademico->nombre ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.programaModular.fields.nombreprograma') }}
+                        </th>
+                        <td>
+                            {{ $programaModular->nombreprograma }}
                         </td>
                     </tr>
                 </tbody>

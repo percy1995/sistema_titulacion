@@ -4,18 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGruposTable extends Migration
+class CreateDocentesTable extends Migration
 {
     public function up()
     {
-        Schema::create('grupos', function (Blueprint $table) {
+        Schema::create('docentes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre')->nullable();
-            $table->string('dia');
-            $table->time('horainicio');
-            $table->date('horafin');
+            $table->string('dni');
+            $table->string('direccion');
+            $table->string('correoinstitucional');
+            $table->string('correopersonal')->nullable();
+            $table->string('celular')->nullable();
             $table->string('tipo');
-            $table->string('aula');
             $table->integer('estado')->nullable();
             $table->timestamps();
             $table->softDeletes();

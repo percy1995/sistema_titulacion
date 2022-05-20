@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyGrupoRequest;
 use App\Http\Requests\StoreGrupoRequest;
 use App\Http\Requests\UpdateGrupoRequest;
@@ -17,6 +18,8 @@ use Yajra\DataTables\Facades\DataTables;
 
 class GrupoController extends Controller
 {
+    use CsvImportTrait;
+
     public function index(Request $request)
     {
         abort_if(Gate::denies('grupo_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -50,14 +53,16 @@ class GrupoController extends Controller
                 return $row->nombre ? $row->nombre : '';
             });
             $table->editColumn('dia', function ($row) {
-                return $row->dia ? $row->dia : '';
+                return $row->dia ? Grupo::DIA_SELECT[$row->dia] : '';
             });
             $table->editColumn('horainicio', function ($row) {
                 return $row->horainicio ? $row->horainicio : '';
             });
-
+            $table->editColumn('horafin', function ($row) {
+                return $row->horafin ? $row->horafin : '';
+            });
             $table->editColumn('tipo', function ($row) {
-                return $row->tipo ? $row->tipo : '';
+                return $row->tipo ? Grupo::TIPO_SELECT[$row->tipo] : '';
             });
             $table->editColumn('aula', function ($row) {
                 return $row->aula ? $row->aula : '';
@@ -66,15 +71,15 @@ class GrupoController extends Controller
                 return $row->periodo ? $row->periodo->periodo : '';
             });
 
-            $table->addColumn('docente_dni', function ($row) {
-                return $row->docente ? $row->docente->dni : '';
-            });
-
             $table->addColumn('programaestudio_nombre', function ($row) {
                 return $row->programaestudio ? $row->programaestudio->nombre : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'periodo', 'docente', 'programaestudio']);
+            $table->editColumn('tiposustentacion', function ($row) {
+                return $row->tiposustentacion ? Grupo::TIPOSUSTENTACION_SELECT[$row->tiposustentacion] : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'periodo', 'programaestudio']);
 
             return $table->make(true);
         }

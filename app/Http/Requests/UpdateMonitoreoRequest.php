@@ -22,12 +22,22 @@ class UpdateMonitoreoRequest extends FormRequest
                 'nullable',
             ],
             'horainicio' => [
+                'required',
                 'date_format:' . config('panel.time_format'),
-                'nullable',
             ],
             'horafin' => [
+                'required',
                 'date_format:' . config('panel.time_format'),
-                'nullable',
+            ],
+            'observacion' => [
+                'required',
+            ],
+            'archivo' => [
+                'array',
+                'required',
+            ],
+            'archivo.*' => [
+                'required',
             ],
         ];
     }

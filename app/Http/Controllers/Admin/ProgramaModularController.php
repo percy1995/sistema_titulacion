@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\CsvImportTrait;
 use App\Http\Requests\MassDestroyProgramaModularRequest;
 use App\Http\Requests\StoreProgramaModularRequest;
 use App\Http\Requests\UpdateProgramaModularRequest;
@@ -15,6 +16,8 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ProgramaModularController extends Controller
 {
+    use CsvImportTrait;
+
     public function index(Request $request)
     {
         abort_if(Gate::denies('programa_modular_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -44,11 +47,12 @@ class ProgramaModularController extends Controller
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : '';
             });
-            $table->editColumn('nombreprograma', function ($row) {
-                return $row->nombreprograma ? $row->nombreprograma : '';
-            });
             $table->addColumn('programaacademico_nombre', function ($row) {
                 return $row->programaacademico ? $row->programaacademico->nombre : '';
+            });
+
+            $table->editColumn('nombreprograma', function ($row) {
+                return $row->nombreprograma ? $row->nombreprograma : '';
             });
 
             $table->rawColumns(['actions', 'placeholder', 'programaacademico']);

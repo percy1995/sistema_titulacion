@@ -11,9 +11,9 @@ class CreateMonitoreosTable extends Migration
         Schema::create('monitoreos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('fechaasesoria')->nullable();
-            $table->time('horainicio')->nullable();
-            $table->time('horafin')->nullable();
-            $table->longText('observacion')->nullable();
+            $table->time('horainicio');
+            $table->time('horafin');
+            $table->longText('observacion');
             $table->integer('estado')->nullable();
             $table->timestamps();
             $table->softDeletes();
